@@ -267,11 +267,12 @@ class RemoteAccount(HttpMixin):
 
         # Unfortunately we need to read over the channel to ensure that recv_exit_status won't hang. See:
         # http://docs.paramiko.org/en/2.0/api/channel.html#paramiko.channel.Channel.recv_exit_status
-        stdout.read()
+        stdout_contents = stdout.read().strip()
+        stderr_contents = stdout.read().strip()
         exit_status = stdout.channel.recv_exit_status()
-        if stdout.strip():
+        if stdout_contents.strip():
             self.logger.info("STDOUT: %s" % stdout)
-        if stderr.strip():
+        if stderr_contents.strip():
             self.logger.info("STDERR: %s" % stderr)
         try:
             if exit_status != 0:
