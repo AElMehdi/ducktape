@@ -271,9 +271,9 @@ class RemoteAccount(HttpMixin):
         stderr_contents = stdout.read().strip()
         exit_status = stdout.channel.recv_exit_status()
         if stdout_contents.strip():
-            self.logger.info("STDOUT: %s" % stdout)
+            self.logger.info("STDOUT: %s" % stdout_contents)
         if stderr_contents.strip():
-            self.logger.info("STDERR: %s" % stderr)
+            self.logger.info("STDERR: %s" % stderr_contents)
         try:
             if exit_status != 0:
                 if not allow_fail:
