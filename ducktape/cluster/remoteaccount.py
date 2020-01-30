@@ -269,6 +269,10 @@ class RemoteAccount(HttpMixin):
         # http://docs.paramiko.org/en/2.0/api/channel.html#paramiko.channel.Channel.recv_exit_status
         stdout.read()
         exit_status = stdout.channel.recv_exit_status()
+        if stdout.strip():
+            self.logger.info("STDOUT: %s" % stdout)
+        if stderr.strip():
+            self.logger.info("STDERR: %s" % stderr)
         try:
             if exit_status != 0:
                 if not allow_fail:
