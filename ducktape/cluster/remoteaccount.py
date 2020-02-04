@@ -260,7 +260,7 @@ class RemoteAccount(HttpMixin):
         :return: The exit status of the command.
         :raise RemoteCommandError: If allow_fail is False and the command returns a non-zero exit status
         """
-        self._log(logging.DEBUG, "Running ssh command: %s" % cmd)
+        self._log(logging.INFO, "Running ssh command: %s" % cmd)
 
         client = self.ssh_client
         stdin, stdout, stderr = client.exec_command(cmd)
